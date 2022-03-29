@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <title>localdb-test</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+</head>
+
+<body>
+    <button id="btn-test">test</button>
+    <p id="p1"></p>
+    <script src="https://unpkg.com/localbase/dist/localbase.dev.js"></script>
+    <script>
+        let db = new Localbase('db')
+        db.collection('users').add({
+            id: 1,
+            name: 'User Name',
+            age: 35
+        })
+        let btntest = document.getElementById("btn-test");
+        btntest.addEventListener('click', test);
+
+        function test() {
+            console.log("test");
+            db.collection('users').doc({
+                id: 1
+            }).update({
+                name: 'nope'
+            });
+            console.log(db.collection('users'));
+        }
+    </script>
+</body>
+
+</html>
